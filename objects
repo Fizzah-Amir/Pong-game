@@ -31,3 +31,60 @@ pen.color("white")
 pen.penup()
 pen.hideturtle()
 pen.goto(0,260)
+def paddle1_up():
+  y=paddle1.ycor()
+  y+=20
+  paddle1.sety(y)
+def paddle1_down():
+  y=paddle1.ycor()
+  y=y-20
+  paddle1.sety(y) 
+
+def paddle2_up():
+ y=paddle2.ycor()
+ y+=20
+ paddle2.sety(y)
+def paddle2_down():
+  y=paddle2.ycor()
+  y=y-20
+  paddle2.sety(y)  
+wn.listen()
+wn.onkeypress(paddle1_up,"w")
+wn.onkeypress(paddle1_down,"s")
+wn.onkeypress(paddle2_up,"o")
+wn.onkeypress(paddle2_down,"d")
+while True:
+     wn.update()
+     #BALL MOVE
+     ball.setx(ball.xcor()+ball.dx)
+     ball.sety(ball.ycor()+ball.dy)
+     #border checking
+     if ball.ycor()>280:
+       ball.sety(280)
+       ball.dy*=-1 #a pos dy is ball is moving upwards ,neg dy moving downards
+     if ball.ycor()<-280:
+      ball.sety(-280)
+      ball.dy*=-1
+     if ball.xcor()<-390:
+       ball.goto(0,0)
+       ball.dx*=-1
+       score1+=1
+       pen.clear()
+       pen.write(f"Player A: {score1} Player B: {scoreb}", align="center", font=("Courier", 24, "normal"))
+     if ball.xcor()>390:
+      ball.goto(0,0)
+      ball.dx*=-1 
+      scoreb+=1
+      pen.clear()
+      pen.write(f"Player A: {score1} Player B: {scoreb}", align="center", font=("Courier", 24, "normal"))
+      #paddle
+      #IMPPP(default square shape is 20*20 pixels stretch wid=5 means 20*5=100
+      #20*1 =20 wide)
+      if (ball.xcor()>340 and ball.xcor()<350) and (ball.ycor()>paddle2.ycor()+40 and ball.ycor()>paddle2.ycor()-40):
+        ball.setx(340)
+        ball.dx*=-1
+  
+      if (ball.xcor()<-340 and ball.xcor()>-350) and (ball.ycor()>paddle2.ycor()+40 and ball.ycor()>paddle2.ycor()-40):
+        ball.setx(340)
+        ball.dx*=-1
+       
